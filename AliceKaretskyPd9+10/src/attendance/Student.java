@@ -1,10 +1,16 @@
 package attendance;
 
-public class Student {
+public class Student implements Attendee {
 
 	private boolean present;
 	private String firstName;
 	private String lastName;
+	
+	public Student(String firstName , String lastName){
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	
 	
 	public boolean isPresent() {
@@ -25,21 +31,19 @@ public class Student {
 	
 	public void setPresent(boolean present) {
 		
-		this.present = present;
+		this.present = isPresent();
+		
+		// this.present = present;
 	
 	}
 	
 	public String getFirstName() {
-		
-		firstName = "Alice";
-		
+	
 		return firstName;
 		
 	}
 
 	public String getLastName() {
-		
-		lastName = "Karetsky";
 		
 		return lastName;
 		
@@ -47,20 +51,63 @@ public class Student {
 	
 	public boolean mathces(String first, String last) {
 		
-		if(this.firstName == first && this.lastName == last) {
+		// return first.toLowerCase().equals(firstName.toLowerCase()) && last.toLowerCase().equals(lastName.toLowerCase());
+		
+		
+		if(this.firstName.equals(first) && this.lastName.equals(last)) {
 			
 			return true;
 			
 		}
 		
+		return false;
+		
 	}
 	
-	boolean matches(String last) {
+	public boolean matches(String last) {
 		
-		
+		return last.toLowerCase().equals(lastName.toLowerCase());
 		
 	}
 
+	public String getReportString() {
+		
+		String report = lastName;
+		
+		report = restrictStringToLength(report,20);
+		
+		report += firstName;
+		
+		report = restrictStringToLength(report, 40);
+		
+		if(present)
+		{
+			
+			report+= "PRESENT\n";
+			
+		}		
+		else {
+			
+			report+="ABSENT\n";
+		}
+		
+		return report;
+	}
 	
-	
+	public String restrictStringToLength(String s, int length) {
+		
+		if(s.length() > length){
+			
+			s = s.substring(0, length -3)+"...";
+			
+			
+		}
+		
+		while(s.length() <length) {
+			
+			s+=" ";
+			
+		}
+		return s;
+	}
 }
