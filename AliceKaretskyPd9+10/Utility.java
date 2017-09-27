@@ -23,11 +23,23 @@ public class Utility{
 	}
 
 	public static boolean keywordIsIsolated(int psn, String keyword, String s){
+	//isolated if surrounded by spaces or punctuation 
+		if(keyword.psn) {
+			
+			
+		}
+		
 		return true;
+	
+		
 	}
 
 	public static boolean noNegations(String s, int psn){
+	
+		
 		return true;
+	
+	
 	}
 
 
