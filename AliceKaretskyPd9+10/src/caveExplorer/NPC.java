@@ -92,7 +92,7 @@ public class NPC {
 			int newCol = currentCol + move[1];
 			setPosition(newRow, newCol);
 		
-		
+		//qwer
 		}
 		
 	}
