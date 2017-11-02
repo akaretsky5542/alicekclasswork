@@ -3,53 +3,70 @@ package caveExplorer;
 public class Inventory {
 
 	private String map;
+	private int money;
+	
 	
 	public Inventory() {
-		updateMap();	
+		updateMap();
 	}
-	
+
 	public void updateMap() {
 		map = " ";
-		//make hor. line across top:
+		//create line across top:
 		for(int i = 0; i < CaveExplorer.caves[0].length -1; i++) {
-			map+="____";//4 underscores
+			map += "____";//4 underscores
 		}
-		//for symmetry, add only three underscores:
-		map +="___\n";
-		for(CaveRoom[] row: CaveExplorer.caves) {
-			//three lines of text per room
+		map+= "___\n";//3 underscores, makes the corner look symmetrical
+		for(CaveRoom[] row : CaveExplorer.caves) {
+			//3 rows of text
 			for(int i = 0; i < 3; i++) {
 				String text = "";
-				for(CaveRoom cr: row) {
-					//if a wall is present draw a line otherwise draw a "\"
-					if(cr.getDoor(CaveRoom.WEST) != null && 
+				for(CaveRoom cr : row) {
+					//if door is open, leave open
+					if(cr.getDoor(CaveRoom.WEST) != null &&
 							cr.getDoor(CaveRoom.WEST).isOpen()) {
 						text += " ";
 					}else {
 						text += "|";
 					}
-					if(i == 0) {
-						text += "   ";
+					//contents of room depend on what row this is
+					if(i==0) {
+						text+="   ";//3 spaces
 					}else if(i == 1) {
-						text += " "+cr.getContents() + " ";
-					}else if(i ==2) {
-						if(cr.getDoor(CaveRoom.SOUTH) != null &&
-								cr.getDoor(CaveRoom.SOUTH).isOpen()) {
+						text += " "+cr.getContents()+" ";
+					}else if(i == 2) {
+						//draw space if door to south is open
+						if(cr.getDoor(CaveRoom.SOUTH) != null && 
+						cr.getDoor(CaveRoom.SOUTH).isOpen()){
 							text+="   ";//3 spaces
 						}else {
-							text+="___";//3 underscores (closed door or wall)
+							text += "___";
 						}
 					}
 				}//last caveroom in row
-				text += "|";
-				map += text + "\n";
+				text+="|";
+				map += text +"\n";
 			}
 		}
 	}
-	
+
 	public String getDescription() {
-		return map;
-//		return "There is nothing in your inventory.";
+		return map + "\n money = " + money;
+//		return "You have nothing in your inventory.";
 	}
+	
+	public int getMoneyAmount() {
+	
+		return money;
+		
+	}
+	
+	public void setMoneyAmount(int money) {
+		
+		this.money = money;
+		
+		
+	}
+	
 
 }

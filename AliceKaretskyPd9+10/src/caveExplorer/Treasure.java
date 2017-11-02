@@ -1,28 +1,22 @@
 package caveExplorer;
 
-import java.util.Arrays;
+public class Treasure {
 
-/**
- * NPC means Non-Playable Character
- * @author Teacher
- *
- */
-public class NPC {
 	
 	//fields relating to navigation
-	private CaveRoom[][] floor;//where the NPC roams
-	private int currentRow;
-	private int currentCol;
-	private NPCRoom currentRoom;
+		private CaveRoom[][] floor;//where the NPC roams
+		private int currentRow;
+		private int currentCol;
+		private TreasureRoom currentRoom;
+		
+		//fields relating to character
+		private boolean active;
+		private String activeDescription;
+		private String inactiveDescription;
 	
-	//fields relating to character
-	private boolean active;
-	private String activeDescription;
-	private String inactiveDescription;
-	
-
-	//default constructor
-	public NPC() {
+	public Treasure() {
+		
+		
 		this.floor = CaveExplorer.caves;
 		this.activeDescription = "There is a person waiting to talk to you.";
 		this.inactiveDescription = "The person you spoke to earlier is standing here.";
@@ -31,14 +25,10 @@ public class NPC {
 		this.currentRow = -1;
 		this.currentRoom = null;
 		this.active = true;
+		
 	}
-	/**
-	 * Note: you can make custom constructors later that use different parameters
-	 * for example:
-	 * public NPC(String description, String inactiveDescription)
-	 *
-	 */
 
+	
 	public boolean isActive() {
 		return active;
 	}
@@ -48,12 +38,12 @@ public class NPC {
 				col < floor[row].length && floor[row][col] instanceof NPCRoom) {
 			//remove the npc from current room
 			if(currentRoom != null) {
-				currentRoom.leaveNPC();
+				currentRoom.leaveTreasure();
 			}
 			currentRow = row;
 			currentCol = col;
-			currentRoom = (NPCRoom)floor[row][col];
-			currentRoom.enterNPC(this);
+			currentRoom = (TreasureRoom)floor[row][col];
+			currentRoom.enterTreasure(this);
 		}
 	}
 	
@@ -100,5 +90,5 @@ public class NPC {
 		}
 		return moves;
 	}
-
+	
 }
