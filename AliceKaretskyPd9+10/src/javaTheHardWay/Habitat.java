@@ -38,6 +38,7 @@ public class Habitat extends Environment {
 			s+=a+"\n";
 		}
 		
+		
 		return s;
 	}
 	
