@@ -57,38 +57,72 @@ public class Searching {
 	private int binarySearch(int[] searchThis, int startIndex, int endIndex, int target) {
 	
 		
-		endIndex = searchThis.length - 1;
-		startIndex = 0;
+		//endIndex = searchThis.length - 1;
+	//	startIndex = 0;
 		
 		
 		
-		if(searchThis[target] != target) {
-			
-
-			System.out.print("sorry not found");
-			
-		}
+//		if(searchThis[target] != target) {
+//			
+//
+//			System.out.print("sorry not found");
+//			
+//		}
+//		
+//		else if(searchThis[target] > (startIndex + (endIndex-1)/2)) {
+//			
+//			startIndex = (startIndex + (endIndex-1)/2);			
+//			
+//			
+//		}
+//		
+//		else if(target <  (startIndex + (endIndex-1)/2)) {
+//			
+//			
+//			endIndex =  (startIndex + (endIndex-1)/2);
+//			
+//		}
+//		
+//		
+//		return searchThis[target];
+//	
+//		
+//	
+		delay();
 		
-		else if(target > (startIndex + (endIndex-1)/2)) {
+		if( startIndex <= endIndex) {
 			
-			startIndex = (startIndex + (endIndex-1)/2);			
+			int middleNumber = (startIndex + (endIndex - 1))/2;
 			
-			
-		}
-		
-		else if(target <  (startIndex + (endIndex-1)/2)) {
-			
-			
-			endIndex =  (startIndex + (endIndex-1)/2);
-			
-		}
-		
-		
-		return searchThis[target];
+			if( target == searchThis[middleNumber]) {
+				
+				return  middleNumber;
+				
+				
+			}
 	
+			if(target < searchThis[middleNumber]) {
+				
+				binarySearch(searchThis, startIndex, middleNumber - 1, target);
+				
+				
+			}
+			
+			else  {
+				
+				
+				binarySearch(searchThis, middleNumber +1, endIndex, target);
+				
+			}
+			
+			
+		}
 		
-	
-	}
+	return -1;
+}
+		
+		
+		
 
 
 	private int search(int[] searchThis, int target) {
@@ -103,9 +137,6 @@ public class Searching {
 			
 			
 		}
-		
-		
-		
 		
 
 		return target;
